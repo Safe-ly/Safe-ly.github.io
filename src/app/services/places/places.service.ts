@@ -23,7 +23,8 @@ export class PlacesService {
   getAllPoints() {
     console.log(this.coordinateOne);
     console.log(this.coordinateTwo);
-    return this.http.get(`http://router.project-osrm.org/route/v1/driving/${this.coordinateOne.lat},${this.coordinateOne.lng};${this.coordinateTwo.lat},${this.coordinateTwo.lng}?overview=full&geometries=geojson&steps=false`).subscribe(
+    // tslint:disable-next-line:max-line-length
+    return this.http.get(`http://ec2-52-30-174-99.eu-west-1.compute.amazonaws.com:5000/route/v1/driving/${this.coordinateOne.lat},${this.coordinateOne.lng};${this.coordinateTwo.lat},${this.coordinateTwo.lng}?overview=full&geometries=geojson&steps=false`).subscribe(
       (data: Response) => {
         console.log(data);
       }

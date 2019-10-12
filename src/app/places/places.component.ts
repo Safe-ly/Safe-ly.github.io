@@ -24,8 +24,8 @@ export class PlacesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.placesOne = places({
-      appId: 'plQEMA5R5MQK',
-      apiKey: '8b124050483be70cb287db0d8998ecf0',
+      appId: 'plD85DLCMVN6',
+      apiKey: '21ae1fd88f04362c9387d2e8e5f1054a',
       container:  this.qElementRef.nativeElement,
     });
 
@@ -34,8 +34,8 @@ export class PlacesComponent implements OnInit, AfterViewInit {
     });
 
     this.placesTwo = places({
-      appId: 'plQEMA5R5MQK',
-      apiKey: '8b124050483be70cb287db0d8998ecf0',
+      appId: 'plD85DLCMVN6',
+      apiKey: '21ae1fd88f04362c9387d2e8e5f1054a',
       container:  this.qElementSecond.nativeElement,
     });
 
