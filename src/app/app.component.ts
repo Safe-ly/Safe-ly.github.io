@@ -2,11 +2,6 @@ import {Component} from '@angular/core';
 import {OsrmRootObject} from "./interfaces/osrm";
 
 
-interface WaypointsProps {
-  lat: number;
-  lng: number;
-}
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -220,28 +215,11 @@ export class AppComponent {
   lat: number = 51.509865;
   lng: number = -0.118092;
   zoom: number = 7;
-  waypoints: WaypointsProps[] = [
-    {
-      lat: 52.521248,
-      lng: 13.399038
-    },
-    {
-      lat: 48.856127,
-      lng: 2.346525
-    }
-  ];
 
   private osrmRootObject: OsrmRootObject;
 
-  constructor() {
-    this.waypoints = this.waypoints.map(point => {
-      return point;
-    });
-  }
-
   receiveMessage($event) {
     this.osrmRootObject = $event;
-    console.log(this.osrmRootObject);
   }
 }
 

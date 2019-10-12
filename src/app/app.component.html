@@ -7,9 +7,17 @@
     <div class="row">
         <div class="col map">
             <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng" [styles]="styles">
-                <agm-polyline>
-                    <agm-polyline-point *ngFor="let point of waypoints" [latitude]="point.lat" [longitude]="point.lng"></agm-polyline-point>
-                </agm-polyline>
+                    <ng-container *ngIf="osrmRootObject">
+                        <agm-polyline [strokeColor]="'red'"> 
+                            <agm-polyline-point  *ngFor="let point of osrmRootObject.routes[0].geometry.coordinates" [latitude]="point[1]" [longitude]="point[0]"></agm-polyline-point>
+                        </agm-polyline>
+                    
+                        <ng-container *ngIf="osrmRootObject.routes[1]">
+                            <agm-polyline [strokeColor]="'green'"> 
+                                <agm-polyline-point  *ngFor="let point of osrmRootObject.routes[1].geometry.coordinates" [latitude]="point[1]" [longitude]="point[0]"></agm-polyline-point>
+                            </agm-polyline> 
+                        </ng-container>
+                    </ng-container>
             </agm-map>
         </div>
 
@@ -17,8 +25,8 @@
             <p class="h2">Safest route: A</p>
             <p>Select one to display more information:</p>
             <div class="align-self-center mx-auto">
-                <div class="btn btn-outline-dark button" >A</div>
-                <div class="btn btn-outline-dark button ml-3" >B</div>
+                <div class="btn btn-outline-red button" >A</div>
+                <div class="btn btn-outline-green button ml-3" >B</div>
             </div>
             <div class="mt-3">
                 <app-bar-chart></app-bar-chart>

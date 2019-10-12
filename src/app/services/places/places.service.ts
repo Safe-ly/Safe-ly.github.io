@@ -22,7 +22,7 @@ export class PlacesService {
 
   getAllPoints(): Observable<any> {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`http://ec2-52-30-174-99.eu-west-1.compute.amazonaws.com:5000/route/v1/driving/${this.coordinateOne.lat},${this.coordinateOne.lng};${this.coordinateTwo.lat},${this.coordinateTwo.lng}?overview=full&geometries=geojson&steps=false&alternatives=2`);
+    return this.http.get(`http://ec2-52-30-174-99.eu-west-1.compute.amazonaws.com:5000/route/v1/driving/${this.coordinateOne.lng},${this.coordinateOne.lat};${this.coordinateTwo.lng},${this.coordinateTwo.lat}?overview=simplified&geometries=geojson&steps=false&alternatives=2`);
   }
 }
 
