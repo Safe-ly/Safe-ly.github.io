@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import places from 'places.js';
 import {environment} from '../../environments/environment';
 import {PlacesService} from '../services/places/places.service';
+import {NearestAccidentsService} from "../services/nearestaccidents/nearest-accidents.service";
 
 @Component({
   selector: 'app-places',
@@ -20,7 +21,8 @@ export class PlacesComponent implements OnInit, AfterViewInit {
   private firstLocation: any;
   private secondLocation: any;
 
-  constructor(private renderer: Renderer2, private placesService: PlacesService) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private renderer: Renderer2, private placesService: PlacesService, private neareastAccidentsService: NearestAccidentsService) { }
 
   ngAfterViewInit() {
     this.placesOne = places({
