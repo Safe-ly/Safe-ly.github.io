@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as AlgoliaSearch from 'algoliasearch';
 import * as turf from '@turf/turf';
 
@@ -8,11 +8,14 @@ import * as turf from '@turf/turf';
 })
 export class NearestAccidentsService {
 
-  constructor() {
-    const client = AlgoliaSearch('8VD8ZKJMEV', 'f313d81e1bc45b25250c21d383b1b889');
-    const index = client.initIndex('dev_name');
+  private index: any;
 
-    const result = index.search({
+  constructor() {
+    this.index = AlgoliaSearch('8VD8ZKJMEV', 'f313d81e1bc45b25250c21d383b1b889').initIndex('dev_name');
+  }
+
+  findNearestPoints() {
+    const result = this.index.search({
       hitsPerPage: 10,
       page: 0,
       analytics: false,
@@ -22,7 +25,9 @@ export class NearestAccidentsService {
     });
 
     console.log(result);
+  }
 
+  getPolygonFromPoints() {
     const point = turf.point([-90.548630, 14.616599]);
     const buffered = turf.buffer(point, 500, {units: 'miles'});
 

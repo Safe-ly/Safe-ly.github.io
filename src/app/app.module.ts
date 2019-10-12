@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import {SearcherComponent} from './searcher/searcher.component';
 import {PlacesComponent} from './places/places.component';
 import { HttpClientModule, /* other http imports */ } from '@angular/common/http';
 import { AgmCoreModule} from '@agm/core';
@@ -15,7 +14,6 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    SearcherComponent,
     PlacesComponent,
     BarChartComponent,
 

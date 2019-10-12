@@ -1,9 +1,22 @@
-import {Component, ElementRef, Input, OnInit, Output, ViewChild, OnDestroy, AfterViewInit, Renderer2} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  OnDestroy,
+  AfterViewInit,
+  Renderer2,
+  EventEmitter
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import places from 'places.js';
 import {environment} from '../../environments/environment';
 import {PlacesService} from '../services/places/places.service';
-import {NearestAccidentsService} from "../services/nearestaccidents/nearest-accidents.service";
+import {NearestAccidentsService} from '../services/nearestaccidents/nearest-accidents.service';
+import {OsrmRootObject} from "../interfaces/osrm";
+import {repeat} from "rxjs/operators";
 
 @Component({
   selector: 'app-places',
@@ -23,6 +36,8 @@ export class PlacesComponent implements OnInit, AfterViewInit {
 
   // tslint:disable-next-line:max-line-length
   constructor(private renderer: Renderer2, private placesService: PlacesService, private neareastAccidentsService: NearestAccidentsService) { }
+
+  @Output() messageEvent = new EventEmitter<OsrmRootObject>();
 
   ngAfterViewInit() {
     this.placesOne = places({
@@ -52,7 +67,11 @@ export class PlacesComponent implements OnInit, AfterViewInit {
   }
 
   submitData() {
-    this.placesService.setCoordinates(this.firstLocation, this.secondLocation);
-    this.placesService.getAllPoints();
+    if (this.qElementRef.nativeElement.value && this.qElementSecond.nativeElement.value) {
+      this.placesService.setCoordinates(this.firstLocation, this.secondLocation);
+      this.placesService.getAllPoints().subscribe((response: OsrmRootObject) => {
+        this.messageEvent.emit(response);
+      });
+    }
   }
 }
