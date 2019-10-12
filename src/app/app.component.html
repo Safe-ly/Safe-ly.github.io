@@ -3,3 +3,9 @@
 <div class="container p-3">
     <app-places></app-places>
 </div>
+<app-places></app-places>
+
+<agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng" [styles]="styles">
+    <agm-marker *ngFor="let point of waypoints" [latitude]="point.lat" [longitude]="point.lng">
+    </agm-marker>
+</agm-map>

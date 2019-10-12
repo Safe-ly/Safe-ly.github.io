@@ -6,17 +6,22 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {SearcherComponent} from './searcher/searcher.component';
 import {PlacesComponent} from './places/places.component';
 import { HttpClientModule, /* other http imports */ } from '@angular/common/http';
+import { AgmCoreModule} from '@agm/core';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     SearcherComponent,
-    PlacesComponent
+    PlacesComponent,
+
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC_dUvrZ8QEAuXGIc2Lbfql9moM0dxMEi4'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
