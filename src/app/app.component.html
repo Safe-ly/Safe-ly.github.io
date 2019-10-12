@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container p-3">
-    <app-places></app-places>
+    <app-places (messageEvent)="receiveMessage($event)"></app-places>
 </div>
 
 <div class="container p-3">
@@ -28,11 +28,9 @@
                     <li class="list-group-item">🌧️ Weather:</li>
                     <li class="list-group-item">☀️ Light condition</li>
                 </ul>
-                
+
             </div>
         </div>
-    </div>  
+    </div>
 </div>
-
-
 

@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {OsrmRootObject} from "./interfaces/osrm";
 
 
 interface WaypointsProps {
@@ -230,11 +231,17 @@ export class AppComponent {
     }
   ];
 
+  private osrmRootObject: OsrmRootObject;
 
   constructor() {
     this.waypoints = this.waypoints.map(point => {
       return point;
     });
+  }
+
+  receiveMessage($event) {
+    this.osrmRootObject = $event;
+    console.log(this.osrmRootObject);
   }
 }
 
