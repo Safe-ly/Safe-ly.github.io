@@ -15,7 +15,7 @@ import places from 'places.js';
 import {environment} from '../../environments/environment';
 import {PlacesService} from '../services/places/places.service';
 import {NearestAccidentsService} from '../services/nearestaccidents/nearest-accidents.service';
-import {OsrmRootObject} from "../interfaces/osrm";
+import {OsrmRootObject, Route} from "../interfaces/osrm";
 import {repeat} from "rxjs/operators";
 
 @Component({
@@ -38,6 +38,8 @@ export class PlacesComponent implements OnInit, AfterViewInit {
   constructor(private renderer: Renderer2, private placesService: PlacesService, private neareastAccidentsService: NearestAccidentsService) { }
 
   @Output() messageEvent = new EventEmitter<OsrmRootObject>();
+  @Output() firstLocationEvent = new EventEmitter<OsrmRootObject>();
+  @Output() secondLocationEvent = new EventEmitter<OsrmRootObject>();
 
   ngAfterViewInit() {
     this.placesOne = places({
@@ -71,6 +73,14 @@ export class PlacesComponent implements OnInit, AfterViewInit {
       this.placesService.setCoordinates(this.firstLocation, this.secondLocation);
       this.placesService.getAllPoints().subscribe((response: OsrmRootObject) => {
         this.messageEvent.emit(response);
+        this.firstLocationEvent.emit(this.firstLocation);
+        this.secondLocationEvent.emit(this.secondLocation);
+
+        response.routes.forEach( (route: Route) => {
+          this.neareastAccidentsService.findNearestAccidents(route.geometry).then(result => {
+            console.log(result);
+          });
+        });
       });
     }
   }
