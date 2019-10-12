@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnInit, Output, ViewChild, OnDestroy, Afte
 import { FormControl } from '@angular/forms';
 import places from 'places.js';
 import {environment} from '../../environments/environment';
+import {PlacesService} from '../services/places/places.service';
 
 @Component({
   selector: 'app-places',
@@ -16,35 +17,40 @@ export class PlacesComponent implements OnInit, AfterViewInit {
   private placesOne: any;
   private placesTwo: any;
 
-  constructor(private renderer: Renderer2) { }
+  private firstLocation: any;
+  private secondLocation: any;
+
+  constructor(private renderer: Renderer2, private placesService: PlacesService) { }
 
   ngAfterViewInit() {
     this.placesOne = places({
       appId: 'plQEMA5R5MQK',
       apiKey: '8b124050483be70cb287db0d8998ecf0',
       container:  this.qElementRef.nativeElement,
-      style: false,
     });
 
-    this.placesOne.on('change', function resultSelected(e) {
-      console.log(e.suggestion.latlng);
+    this.placesOne.on('change', (e) => {
+      this.firstLocation = e.suggestion.latlng;
     });
 
     this.placesTwo = places({
       appId: 'plQEMA5R5MQK',
       apiKey: '8b124050483be70cb287db0d8998ecf0',
       container:  this.qElementSecond.nativeElement,
-      style: false,
     });
 
-    this.placesTwo.on('change', function resultSelected(e) {
-      console.log(e.suggestion.latlng);
+    this.placesTwo.on('change', (e) => {
+      this.secondLocation = e.suggestion.latlng;
     });
 
   }
 
   public ngOnInit() {
 
+  }
 
+  submitData() {
+    this.placesService.setCoordinates(this.firstLocation, this.secondLocation);
+    this.placesService.getAllPoints();
   }
 }

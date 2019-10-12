@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {SearcherComponent} from './searcher/searcher.component';
 import {PlacesComponent} from './places/places.component';
+import { HttpClientModule, /* other http imports */ } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {PlacesComponent} from './places/places.component';
     PlacesComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

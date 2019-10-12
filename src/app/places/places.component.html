@@ -1,2 +1,11 @@
-<input type="search" #place1 class="form-control" placeholder="Where are we going?" />
-<input type="search" #place2 class="form-control" placeholder="Where are we going?" />
+<div class="row">
+  <div class="col-6">
+    <input type="search" #place1 class="form-control" placeholder="Start point" />
+  </div>
+  <div class="col-6">
+    <input type="search" #place2 class="form-control" placeholder="End point" />
+  </div>
+  <div class="col-12">
+    <div class="btn btn-primary" (click)="submitData()">Submit</div>
+  </div>
+</div>
