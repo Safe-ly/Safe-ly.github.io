@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {OsrmRootObject} from './interfaces/osrm';
 
-export interface Markercoords{
+export interface MarkerCoords {
   lat: number;
   lng: number;
 }
@@ -13,7 +13,6 @@ export interface Markercoords{
     './app.component.css',
   ]
 })
-
 export class AppComponent {
   title = 'safelyweb';
   styles: any = [
@@ -205,10 +204,13 @@ export class AppComponent {
   lat = 52.300962;
   lng = -1.479097;
   zoom = 6;
-  
+
   private osrmRootObject: OsrmRootObject;
-  private firstLocation: Markercoords;
-  private secondLocation: Markercoords;
+  private firstLocation: MarkerCoords;
+  private secondLocation: MarkerCoords;
+
+  private firstRouteAccidents: any;
+  private secondRouteAccidents: any;
 
   receiveMessage($event) {
     this.osrmRootObject = $event;
@@ -220,6 +222,14 @@ export class AppComponent {
 
   receiveMessageSecondLocation($event) {
     this.secondLocation = $event;
+  }
+
+  receiveMessageFirstRouteAccidents($event) {
+    this.firstRouteAccidents = $event;
+  }
+
+  receiveMessageSecondRouteAccidents($event) {
+    this.secondRouteAccidents = $event;
   }
 
 }

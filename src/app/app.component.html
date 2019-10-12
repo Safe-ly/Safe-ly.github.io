@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container p-3">
-    <app-places (messageEvent)="receiveMessage($event)" (firstLocationEvent)="receiveMessageFirstLocation($event)" (secondLocationEvent)="receiveMessageSecondLocation($event)"></app-places>
+    <app-places (messageEvent)="receiveMessage($event)" (firstRouteEvent)="receiveMessageFirstRouteAccidents" (secondRouteEvent)="receiveMessageSecondRouteAccidents" (firstLocationEvent)="receiveMessageFirstLocation($event)" (secondLocationEvent)="receiveMessageSecondLocation($event)"></app-places>
 </div>
 
 <div class="container p-3">
@@ -8,13 +8,14 @@
         <div class="col map">
             <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng" [styles]="styles">
                     <ng-container *ngIf="osrmRootObject">
-                        <agm-polyline [strokeColor]="'red'"> 
+                        <agm-polyline [strokeColor]="'red'">
                             <agm-polyline-point  *ngFor="let point of osrmRootObject.routes[0].geometry.coordinates" [latitude]="point[1]" [longitude]="point[0]"></agm-polyline-point>
                         </agm-polyline>
+
                         <ng-container *ngIf="osrmRootObject.routes[1]">
-                            <agm-polyline [strokeColor]="'green'"> 
+                            <agm-polyline [strokeColor]="'green'">
                                 <agm-polyline-point  *ngFor="let point of osrmRootObject.routes[1].geometry.coordinates" [latitude]="point[1]" [longitude]="point[0]"></agm-polyline-point>
-                            </agm-polyline> 
+                            </agm-polyline>
                             <agm-marker [latitude]="secondLocation.lat" [longitude]="secondLocation.lng"></agm-marker>
                             <agm-marker [latitude]="firstLocation.lat" [longitude]="firstLocation.lng"></agm-marker>
                         </ng-container>

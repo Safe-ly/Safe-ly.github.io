@@ -41,6 +41,10 @@ export class PlacesComponent implements OnInit, AfterViewInit {
   @Output() firstLocationEvent = new EventEmitter<OsrmRootObject>();
   @Output() secondLocationEvent = new EventEmitter<OsrmRootObject>();
 
+  @Output() firstRouteEvent = new EventEmitter<any>();
+  @Output() secondRouteEvent = new EventEmitter<any>();
+
+
   ngAfterViewInit() {
     this.placesOne = places({
       appId: 'plD85DLCMVN6',
@@ -76,11 +80,15 @@ export class PlacesComponent implements OnInit, AfterViewInit {
         this.firstLocationEvent.emit(this.firstLocation);
         this.secondLocationEvent.emit(this.secondLocation);
 
-        response.routes.forEach( (route: Route) => {
-          this.neareastAccidentsService.findNearestAccidents(route.geometry).then(result => {
-            console.log(result);
-          });
+        this.neareastAccidentsService.findNearestAccidents(response.routes[0].geometry.coordinates).then(result => {
+          this.firstRouteEvent.emit(result.hits);
         });
+
+        if (response.routes.length === 2) {
+          this.neareastAccidentsService.findNearestAccidents(response.routes[1].geometry.coordinates).then(result => {
+            this.secondRouteEvent.emit(result.hits);
+          });
+        }
       });
     }
   }
