@@ -22,10 +22,15 @@ export class BarChartComponent implements OnInit {
   public barChartLabels = ['Accident severity'];
   public barChartType = 'bar';
   public barChartLegend = true;
+
+  private no1 = Math.floor(Math.random() * 30) + 1;
+  private no2 = Math.floor(Math.random() * 30) + 1;
+  private no3 = 100 - this.no1 - this.no2;
+
   public barChartData = [
-    {data: [30], label: "High severity"},
-    {data: [50], label: "Medium severity"},
-    {data: [60], label: "Low severity"}
+    {data: [this.no1], label: "High severity"},
+    {data: [this.no2], label: "Medium severity"},
+    {data: [this.no3], label: "Low severity"}
   ];
 
   ngOnInit() {
