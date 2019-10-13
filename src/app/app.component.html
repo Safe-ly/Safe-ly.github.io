@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container p-3">
-    <app-places (messageEvent)="receiveMessage($event)" (firstRouteEvent)="receiveMessageFirstRouteAccidents($event)" (secondRouteEvent)="receiveMessageSecondRouteAccidents($event)" (firstLocationEvent)="receiveMessageFirstLocation($event)" (secondLocationEvent)="receiveMessageSecondLocation($event)"></app-places>
+    <app-places (messageEvent)="receiveMessage($event)" (firstRouteEvent)="receiveMessageFirstRouteAccidents($event)" (secondRouteEvent)="receiveMessageSecondRouteAccidents($event)" (firstLocationEvent)="receiveMessageFirstLocation($event)" (secondLocationEvent)="receiveMessageSecondLocation($event)"
+                (firstRouteHighSeverityProbability)="receiveMessageFirstRouteProbability($event)" (secondRouteHighSeverityProbability)="receiveMessageSecondRouteProbability($event)"></app-places>
 </div>
 
 <div class="container p-3">
@@ -27,21 +28,35 @@
         </div>
 
         <div class="col" *ngIf="osrmRootObject">
-            <p class="h2">Safest route: A</p>
-            <p>Select one to display more information:</p>
+          <p class="h2" *ngIf="firstRouteProb && secondRouteProb">
+            Safer route: <span *ngIf="firstRouteProb.prob < secondRouteProb.prob">A</span>
+            <span *ngIf="firstRouteProb.prob > secondRouteProb.prob">B</span>
+            <span *ngIf="firstRouteProb.prob === secondRouteProb.prob">None</span>
+          </p>
+            <p>Select one to display more information (values in represents that if the accident happens, it will have high severity):</p>
             <div class="align-self-center mx-auto">
-                <div class="btn btn-outline-danger button" >A</div>
-                <div class="btn btn-outline-success button ml-3" >B</div>
+              <div class="btn btn-outline-danger button" (click)="selected=1">A<span *ngIf="firstRouteProb"> ({{ firstRouteProb.prob * 100 | number:'1.0-0'}}%)</span></div>
+                <div class="btn btn-outline-success button ml-3" (click)="selected=2" *ngIf="osrmRootObject.routes[1]">B<span *ngIf="secondRouteProb"> ({{ secondRouteProb.prob * 100 | number:'1.0-0'}}%)</span></div>
             </div>
-            <div class="mt-3">
+            <div class="mt-3" *ngIf="selected">
+                <ng-container *ngIf="selected === 1">
+                  <app-bar-chart></app-bar-chart>
+                  <ul class="list-group mx-auto">
+                      <li class="list-group-item">🧓🏻 Age: 50-70, Please pay more attention for older drivers </li>
+                      <li class="list-group-item">⚠️ Speed limit: 100</li>
+                      <li class="list-group-item">🌧️ Weather: raining, Please do not plan your journey when it rains</li>
+                      <li class="list-group-item">☀️ Light condition: Night - no light, Please be careful in places where there is no any light.</li>
+                  </ul>
+                </ng-container>
+              <ng-container *ngIf="selected === 2">
                 <app-bar-chart></app-bar-chart>
                 <ul class="list-group mx-auto">
-                    <li class="list-group-item">🧓🏻 Age:</li>
-                    <li class="list-group-item" >⚠️ Speed limit:</li>
-                    <li class="list-group-item">🌧️ Weather:</li>
-                    <li class="list-group-item">☀️ Light condition</li>
+                  <li class="list-group-item">🧓🏻 Age: 20-30, Please pay more attention for younger drivers</li>
+                  <li class="list-group-item">⚠️ Speed limit: 140</li>
+                  <li class="list-group-item">🌧️ Weather: sunny, While it rains, drivers are more concentrated on road</li>
+                  <li class="list-group-item">☀️ Light condition, Day - There are accidents even in well lighted environment.</li>
                 </ul>
-
+              </ng-container>
             </div>
         </div>
     </div>

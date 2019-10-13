@@ -6,7 +6,9 @@ export interface MarkerCoords {
   lng: number;
 }
 
- 
+export interface RouteProb {
+  prob: number;
+}
 
 @Component({
   selector: 'app-root',
@@ -208,6 +210,8 @@ export class AppComponent {
   zoom = 6;
   icon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 
+  selected = 0;
+
   private osrmRootObject: OsrmRootObject;
   private firstLocation: MarkerCoords;
   private secondLocation: MarkerCoords;
@@ -215,8 +219,12 @@ export class AppComponent {
   private firstRouteAccidents: MarkerCoords;
   private secondRouteAccidents: MarkerCoords;
 
+  private firstRouteProb: RouteProb;
+  private secondRouteProb: RouteProb;
+
   receiveMessage($event) {
     this.osrmRootObject = $event;
+    this.selected = 0;
   }
 
   receiveMessageFirstLocation($event) {
@@ -229,13 +237,19 @@ export class AppComponent {
 
   receiveMessageFirstRouteAccidents($event) {
     this.firstRouteAccidents = $event;
-    console.log(this.firstRouteAccidents);
-    console.log(this.firstRouteAccidents[0]._geoloc.lat);
   }
 
   receiveMessageSecondRouteAccidents($event) {
     this.secondRouteAccidents = $event;
-    console.log(this.secondRouteAccidents[0]._geoloc.lat);
+  }
+
+  receiveMessageFirstRouteProbability($event) {
+    this.firstRouteProb = $event;
+  }
+
+
+  receiveMessageSecondRouteProbability($event) {
+    this.secondRouteProb = $event;
   }
 
 }
