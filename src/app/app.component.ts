@@ -6,6 +6,8 @@ export interface MarkerCoords {
   lng: number;
 }
 
+ 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -204,13 +206,14 @@ export class AppComponent {
   lat = 52.300962;
   lng = -1.479097;
   zoom = 6;
+  icon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 
   private osrmRootObject: OsrmRootObject;
   private firstLocation: MarkerCoords;
   private secondLocation: MarkerCoords;
 
-  private firstRouteAccidents: any;
-  private secondRouteAccidents: any;
+  private firstRouteAccidents: MarkerCoords;
+  private secondRouteAccidents: MarkerCoords;
 
   receiveMessage($event) {
     this.osrmRootObject = $event;
@@ -226,10 +229,13 @@ export class AppComponent {
 
   receiveMessageFirstRouteAccidents($event) {
     this.firstRouteAccidents = $event;
+    console.log(this.firstRouteAccidents);
+    console.log(this.firstRouteAccidents[0]._geoloc.lat);
   }
 
   receiveMessageSecondRouteAccidents($event) {
     this.secondRouteAccidents = $event;
+    console.log(this.secondRouteAccidents[0]._geoloc.lat);
   }
 
 }
