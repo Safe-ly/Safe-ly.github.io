@@ -9,6 +9,12 @@
         <div class="col map">
             <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng" [styles]="styles">
                     <ng-container *ngIf="osrmRootObject">
+                        <agm-marker [latitude]="secondLocation.lat" [longitude]="secondLocation.lng"></agm-marker>
+                        <agm-marker [latitude]="firstLocation.lat" [longitude]="firstLocation.lng"></agm-marker>
+                        <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/js-marker-clusterer/gh-pages/images/m">
+                            <agm-marker [iconUrl]="icon" *ngFor="let point of firstRouteAccidents" [latitude]="point._geoloc.lat" [longitude]="point._geoloc.lng"></agm-marker>
+                            <agm-marker [iconUrl]="icon" *ngFor="let point of secondRouteAccidents" [latitude]="point._geoloc.lat" [longitude]="point._geoloc.lng"></agm-marker>
+                        </agm-marker-cluster>
                         <agm-polyline [strokeColor]="'red'">
                             <agm-polyline-point  *ngFor="let point of osrmRootObject.routes[0].geometry.coordinates" [latitude]="point[1]" [longitude]="point[0]"></agm-polyline-point>
                         </agm-polyline>
@@ -16,12 +22,6 @@
                             <agm-polyline [strokeColor]="'green'">
                                 <agm-polyline-point  *ngFor="let point of osrmRootObject.routes[1].geometry.coordinates" [latitude]="point[1]" [longitude]="point[0]"></agm-polyline-point>
                             </agm-polyline>
-                            <agm-marker [latitude]="secondLocation.lat" [longitude]="secondLocation.lng"></agm-marker>
-                            <agm-marker [latitude]="firstLocation.lat" [longitude]="firstLocation.lng"></agm-marker>
-                        <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/js-marker-clusterer/gh-pages/images/m">
-                            <agm-marker [iconUrl]="icon" *ngFor="let point of firstRouteAccidents" [latitude]="point._geoloc.lat" [longitude]="point._geoloc.lng"></agm-marker>
-                            <agm-marker [iconUrl]="icon" *ngFor="let point of secondRouteAccidents" [latitude]="point._geoloc.lat" [longitude]="point._geoloc.lng"></agm-marker>
-                        </agm-marker-cluster>
                         </ng-container>
                     </ng-container>
             </agm-map>
