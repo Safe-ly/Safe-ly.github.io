@@ -7,6 +7,7 @@ import { HttpClientModule, /* other http imports */ } from '@angular/common/http
 import { AgmCoreModule} from '@agm/core';
 import { ChartsModule } from 'ng2-charts';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 
 
@@ -16,11 +17,13 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
     NavbarComponent,
     PlacesComponent,
     BarChartComponent,
+    
 
   ],
   imports: [
     BrowserModule,
     ChartsModule,
+    AgmJsMarkerClustererModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC_dUvrZ8QEAuXGIc2Lbfql9moM0dxMEi4'
