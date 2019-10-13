@@ -1,0 +1,10 @@
+.title{
+    font-family: 'Raleway', sans-serif;
+    color: black;  
+    font-weight: 200;
+    font-size: 30px;  
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white;
+}

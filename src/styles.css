@@ -10,3 +10,49 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 .gmnoprint div {
     background:none !important;
 }
+
+.form-control:focus{
+    border-color: #cccccc;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
+input{
+    border-radius:0px !important;
+}
+.btn{
+    border-radius:0px !important;
+    height: 38px !important;
+}
+
+.raleway{
+    font-family: 'Raleway', sans-serif;
+}
+
+.navbar {
+    color: transparent;
+    background-color: transparent;
+}
+
+
+
+.searcher{
+    width: 25px !important;
+}
